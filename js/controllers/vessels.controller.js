@@ -32,17 +32,19 @@
             last_known_position: [10, 20]
         }];
 
-        $scope.$on('new vessel added', function(e, vessel) {
-            $scope.vessels.push(vessel);
-        });
-
-        $scope.$on('vessel updated', function(e, updatedVessel) {
+        function updateOrAppendVessel(newVessel) {
+            var found = false;
             $scope.vessels.forEach(function(vessel, idx) {
-                if (vessel.id === updatedVessel.id) {
-                    $scope.vessels[idx] = updatedVessel;
+                if (vessel.id === newVessel.id) {
+                    $scope.vessels[idx] = newVessel;
+                    found = true;
                 }
             });
-        });
+
+            if(!found) {
+                $scope.vessels.push(newVessel);
+            }
+        }
 
         function displayVesselForm(ev, vessel) {
             vessel = angular.extend({}, vessel);
@@ -54,6 +56,10 @@
                 clickOutsideToClose: true,
                 templateUrl: '/views/vessels.new.html',
                 targetEvent: ev,
+            }).then(function(vessel) {
+                if(vessel) {
+                    updateOrAppendVessel(vessel);
+                }
             });
         }
 

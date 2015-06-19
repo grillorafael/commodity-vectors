@@ -11,12 +11,11 @@
                 $scope.vessel.id = parseInt(Math.random() * 10000);
             }
 
-            $rootScope.$broadcast(eventName, $scope.vessel);
-            $mdDialog.hide();
+            $mdDialog.hide($scope.vessel);
         };
 
         $scope.closeAddForm = function() {
-            $mdDialog.hide();
+            $mdDialog.hide(false);
         };
     }
 })();
