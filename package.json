@@ -1,0 +1,16 @@
+{
+    "name": "commodity-vectors",
+    "version": "1.0.0",
+    "description": "",
+    "main": "gulpfile.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Rafael Grillo Abreu <grillorafael@gmail.com> (http://rgrillo.com)",
+    "license": "ISC",
+    "devDependencies": {
+        "browser-sync": "^2.7.3",
+        "gulp": "^3.8.11",
+        "gulp-serve": "^1.0.0"
+    }
+}

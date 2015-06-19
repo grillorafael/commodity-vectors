@@ -32,12 +32,17 @@
             last_known_position: [10, 20]
         }];
 
-        function updateOrAppendVessel(newVessel) {
+        function updateVesselsList(newVessel) {
             var found = false;
             $scope.vessels.forEach(function(vessel, idx) {
                 if (vessel.id === newVessel.id) {
-                    $scope.vessels[idx] = newVessel;
                     found = true;
+                    if(newVessel.deleted) {
+                        $scope.vessels.splice(idx, 1);
+                    }
+                    else {
+                        $scope.vessels[idx] = newVessel;
+                    }
                 }
             });
 
@@ -47,18 +52,18 @@
         }
 
         function displayVesselForm(ev, vessel) {
-            vessel = angular.extend({}, vessel);
+            vessel = angular.copy(vessel);
             $mdDialog.show({
                 locals: {
                     vessel: vessel
                 },
                 controller: 'VesselCtrl',
                 clickOutsideToClose: true,
-                templateUrl: '/views/vessels.new.html',
+                templateUrl: '/views/vessels.form.html',
                 targetEvent: ev,
             }).then(function(vessel) {
                 if(vessel) {
-                    updateOrAppendVessel(vessel);
+                    updateVesselsList(vessel);
                 }
             });
         }

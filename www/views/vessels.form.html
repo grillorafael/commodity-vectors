@@ -1,0 +1,72 @@
+<md-dialog aria-label="Add new Vessel">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add new Vessel</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="closeAddForm()">
+                <md-icon class="fa fa-times fa-2x" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <form name="vesselForm" ng-submit='addVessel()' novalidate>
+            <label>Basic Info</label>
+            <md-input-container>
+                <label>Name</label>
+                <input required name="vesselName" ng-model="vessel.name">
+                <div ng-messages ng-if='vesselForm.vesselName.$invalid && vesselForm.vesselName.$dirty'>
+                    <div ng-message>This field is required</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Width <small>(in meters)</small></label>
+                <input required name="vesselWidth" ng-model="vessel.width">
+                <div ng-messages ng-if='vesselForm.vesselWidth.$invalid && vesselForm.vesselWidth.$dirty'>
+                    <div ng-message>This field is required</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Length <small>(in meters)</small></label>
+                <input required name="vesselLength" ng-model="vessel.length">
+                <div ng-messages ng-if='vesselForm.vesselLength.$invalid && vesselForm.vesselLength.$dirty'>
+                    <div ng-message>This field is required</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Draft <small>(in meters)</small></label>
+                <input required name="vesselDraft" ng-model="vessel.draft">
+                <div ng-messages ng-if='vesselForm.vesselDraft.$invalid && vesselForm.vesselDraft.$dirty'>
+                    <div ng-message>This field is required</div>
+                </div>
+            </md-input-container>
+            <label>Last Known Position</label>
+            <md-content layout="row">
+                <md-input-container>
+                    <label>Latitude</label>
+                    <input required name="vesselLatitude" ng-model="vessel.last_known_position[0]">
+                    <div ng-messages ng-if='vesselForm.vesselLatitude.$invalid && vesselForm.vesselLatitude.$dirty'>
+                        <div ng-message>This field is required</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Longitude</label>
+                    <input required name="vesselLongitude" ng-model="vessel.last_known_position[1]">
+                    <div ng-messages ng-if='vesselForm.vesselLongitude.$invalid && vesselForm.vesselLongitude.$dirty'>
+                        <div ng-message>This field is required</div>
+                    </div>
+                </md-input-container>
+            </md-content>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-if='vessel.id !== undefined' ng-click='deleteVessel($event)' class="md-warn">
+            Delete
+        </md-button>
+        <span flex></span>
+        <md-button ng-click="addVessel()" class="md-primary md-raised" aria-label="Submit vessel form">
+            <span ng-if='vessel.id === undefined && !sending'>Add</span>
+            <span ng-if='vessel.id !== undefined && !sending'>Update</span>
+            <md-icon ng-if='sending' class="fa fa-circle-o-notch fa-spin fa-2x" aria-label="Loading"></md-icon>
+        </md-button>
+    </div>
+</md-dialog>
