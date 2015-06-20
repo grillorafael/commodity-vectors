@@ -38,60 +38,72 @@ app.use(bodyParser.json());
 app.use(compression());
 app.use(cors());
 
+function parseErrors(err) {
+    var errors = {};
 
-app.get('/vessels/:page?', function(req, res) {
-    var page = req.params.page || 1;
-    var elementsPerPage = 10;
+    Object.keys(err.errors).forEach(function(field) {
+        errors[field] = err.errors[field].message;
+    });
+
+    return errors;
+}
+
+
+app.get('/api/vessels/:page?', function(req, res) {
+    // var page = req.params.page || 1;
+    // var elementsPerPage = 10;
     // Vessel.find().skip(elementsPerPage * (page - 1)).limit(elementsPerPage).exec(function(err, vessels) {
     Vessel.find().exec(function(err, vessels) {
         res.json(vessels);
     });
 });
 
-app.post('/vessels', function(req, res) {
-    // TODO Sanitize fields
-    var vessel = new Vessel(req.body);
-
-    vessel.save(function(err) {
-        if (!err) {
-            res.json(vessel);
-        } else {
-            var errors = {};
-
-            Object.keys(err.errors).forEach(function(field) {
-                errors[field] = err.errors[field].message;
-            });
-
-            res.status(400).json({
-                errors: errors
-            });
-        }
+app.delete('/api/vessels/:id', function(req, res) {
+    Vessel.find({
+        _id: req.params.id
+    }).remove().exec(function(err) {
+        res.sendStatus(err ? 404 : 200);
     });
 });
 
-app.put('/vessels/:id', function(req, res) {
-    // TODO Sanitize fields
-    Vessel.findOneAndUpdate({
-        _id: req.params.id
-    }, {
-        $set: req.body
-    }, {
-        new: true
-    }, function(err, vessel) {
-        if (!err) {
-            res.json(vessel);
-        } else {
-            var errors = {};
+app.post('/api/vessels', function(req, res) {
+    var vessel = new Vessel(req.body);
+    if (vessel.errors) {
+        res.status(400).json({
+            errors: parseErrors(vessel)
+        });
+        return;
+    }
 
-            Object.keys(err.errors).forEach(function(field) {
-                errors[field] = err.errors[field].message;
-            });
-
-            res.status(400).json({
-                errors: errors
-            });
-        }
-    });
+    if (req.body._id) {
+        Vessel.findOneAndUpdate({
+            _id: vessel._id
+        }, {
+            $set: vessel
+        }, {
+            new: true
+        }, function(err, vessel) {
+            if (!err) {
+                res.json(vessel);
+            } else {
+                res.status(400).json({
+                    errors: parseErrors(err)
+                });
+            }
+        });
+    } else {
+        vessel.save(function(err) {
+            console.log(err);
+            if (!err) {
+                console.log('saved', vessel);
+                res.json(vessel);
+            } else {
+                res.status(400).json({
+                    errors: parseErrors(err)
+                });
+            }
+        });
+    }
 });
 
 
