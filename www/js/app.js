@@ -8,12 +8,8 @@
         'commodity-vectors.services'
     ])
         .config(function($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/dashboard");
+            $urlRouterProvider.otherwise("/vessels");
             $stateProvider
-                .state('methods', {
-                    url: "/dashboard",
-                    templateUrl: "/views/dashboard.html"
-                })
                 .state('vessels', {
                     url: "/vessels",
                     templateUrl: "/views/vessels.html",
