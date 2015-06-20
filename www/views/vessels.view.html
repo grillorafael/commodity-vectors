@@ -1,0 +1,40 @@
+<md-dialog aria-label="View vessel" flex="50" flex-sm="80">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2><i class="fa fa-ship"></i> {{vessel.name}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="closeDialog()">
+                <md-icon class="fa fa-times fa-2x" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout="column">
+        <dl class="view-display">
+            <dt>Length</dt>
+            <dd>{{vessel.len}}m</dd>
+            <dt>Width</dt>
+            <dd>{{vessel.width}}m</dd>
+            <dt>Draft</dt>
+            <dd>{{vessel.draft}}m</dd>
+            <dt ng-click="setPosition()">
+                Last Known Position
+                <md-tooltip md-direction="right" hide-sm>
+                    View on Map
+                </md-tooltip>
+            </dt>
+            <dd>({{vessel.last_known_position[1]}}, {{vessel.last_known_position[0]}})</dd>
+        </dl>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom' hide-sm>
+            <ui-gmap-marker idKey='vessel._id' coords='map.center'></ui-gmap-marker>
+        </ui-gmap-google-map>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click='openEdit(vessel)' class="md-warn">
+            Edit
+        </md-button>
+        <span flex></span>
+        <md-button ng-click="closeDialog()" class="md-primary md-raised" aria-label="Close vessel view">
+            Close
+        </md-button>
+    </div>
+</md-dialog>

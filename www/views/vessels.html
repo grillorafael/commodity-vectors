@@ -7,20 +7,31 @@
                 Add Vessel
             </md-button>
         </md-content>
-        <md-list>
+        <md-content ng-if='vessels.length === 0' class="text-center">
+            <h3 class="text-center">You have no Vessels</h3>
+            <md-button class="md-fab" aria-label="Add vessel" ng-click='addVessel($event)'>
+                <md-icon class="fa fa-2x fa-plus"></md-icon>
+            </md-button>
+        </md-content>
+        <md-list ng-if='vessels.length > 0'>
             <md-subheader class="md-no-sticky">{{vessels.length}} Vessels</md-subheader>
-            <h3 class="text-center" ng-if='vessels.length === 0'>You have no Vessels. Add a new one by clicking the button above</h3>
             <md-list-item class="md-2-line" ng-repeat="vessel in vessels track by vessel._id">
                 <div class="md-list-item-text">
-                    <h3>#{{vessel._id}} {{vessel.name}}</h3>
-                    <p>Last known position: ({{vessel.last_known_position[1]}}, {{vessel.last_known_position[0]}})</p>
+                    <h3>{{$index + 1}}. {{vessel.name}}</h3>
+                    <p>({{vessel.last_known_position[1]}}, {{vessel.last_known_position[0]}})</p>
                 </div>
 
                 <md-button class="md-accent md-fab md-mini md-raised" ng-click='editVessel($event, vessel)'>
                     <md-tooltip md-direction="left">
-                        Edit Vessel
+                        Edit
                     </md-tooltip>
                     <md-icon class="fa fa-lg fa-pencil" aria-label="Edit"></md-icon>
+                </md-button>
+                <md-button class="md-accent md-fab md-mini md-raised" ng-click='viewVessel($event, vessel)'>
+                    <md-tooltip md-direction="top">
+                        Details
+                    </md-tooltip>
+                    <md-icon class="fa fa-lg fa-eye" aria-label="Details"></md-icon>
                 </md-button>
                 <md-divider></md-divider>
             </md-list-item>

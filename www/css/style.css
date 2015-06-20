@@ -1,3 +1,29 @@
 .text-center {
     text-align: center;
 }
+
+.angular-google-map-container {
+    height: 300px;
+}
+
+
+.view-display dt {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.view-display dt[ng-click] {
+    border-bottom: 1px dashed black;
+}
+
+.view-display dt[ng-click]:hover {
+    cursor: pointer;
+}
+
+.view-display dt[ng-click]:focus {
+    outline: none;
+}
+
+.view-display dd {
+    margin-left: 10px;
+}

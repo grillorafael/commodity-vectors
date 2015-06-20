@@ -27,9 +27,10 @@
             vessel = angular.copy(vessel);
             $mdDialog.show({
                 locals: {
-                    vessel: vessel
+                    vessel: vessel,
+                    displayVesselForm: displayVesselForm
                 },
-                controller: 'VesselCtrl',
+                controller: 'VesselFormCtrl',
                 clickOutsideToClose: true,
                 templateUrl: '/views/vessels.form.html',
                 targetEvent: ev,
@@ -39,6 +40,23 @@
                 }
             });
         }
+
+        $scope.viewVessel = function(ev, vessel) {
+            $mdDialog.show({
+                locals: {
+                    vessel: vessel,
+                    displayVesselForm: displayVesselForm
+                },
+                controller: 'VesselViewCtrl',
+                clickOutsideToClose: true,
+                templateUrl: '/views/vessels.view.html',
+                targetEvent: ev,
+            }).then(function(vessel) {
+                if(vessel) {
+                    updateVesselsList(vessel);
+                }
+            });
+        };
 
         $scope.addVessel = displayVesselForm;
         $scope.editVessel = displayVesselForm;

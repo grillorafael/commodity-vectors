@@ -3,7 +3,7 @@
         <div class="md-toolbar-tools">
             <h2>Add new Vessel</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="closeAddForm()">
+            <md-button class="md-icon-button" ng-click="closeDialog()">
                 <md-icon class="fa fa-times fa-2x" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
@@ -63,16 +63,16 @@
                 </md-input-container>
             </md-content>
         </form>
+        <md-progress-linear md-mode="indeterminate" ng-if='sending'></md-progress-linear>
     </md-dialog-content>
     <div class="md-actions" layout="row">
-        <md-button ng-if='vessel._id !== undefined' ng-click='deleteVessel($event)' class="md-warn">
+        <md-button class="md-warn" ng-if='vessel._id !== undefined' ng-click='deleteVessel($event)'>
             Delete
         </md-button>
         <span flex></span>
-        <md-button ng-click="addVessel()" class="md-primary md-raised" aria-label="Submit vessel form">
+        <md-button class="md-primary md-raised" aria-label="Submit vessel form" ng-click="addVessel()" ng-disabled="sending">
             <span ng-if='vessel._id === undefined && !sending'>Add</span>
             <span ng-if='vessel._id !== undefined && !sending'>Update</span>
-            <md-icon ng-if='sending' class="fa fa-circle-o-notch fa-spin fa-2x" aria-label="Loading"></md-icon>
         </md-button>
     </div>
 </md-dialog>
