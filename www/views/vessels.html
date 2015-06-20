@@ -15,7 +15,7 @@
         </md-content>
         <md-list ng-if='vessels.length > 0'>
             <md-subheader class="md-no-sticky">{{vessels.length}} Vessels</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="vessel in vessels track by vessel._id">
+            <md-list-item class="md-2-line" ng-repeat="vessel in vessels track by vessel._id" id="vessel-{{vessel._id}}">
                 <div class="md-list-item-text">
                     <h3>{{$index + 1}}. {{vessel.name}}</h3>
                     <p>({{vessel.last_known_position[1]}}, {{vessel.last_known_position[0]}})</p>
