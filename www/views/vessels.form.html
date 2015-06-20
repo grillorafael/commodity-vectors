@@ -13,29 +13,35 @@
             <label>Basic Info</label>
             <md-input-container>
                 <label>Name</label>
-                <input required name="vesselName" ng-model="vessel.name">
-                <div ng-messages ng-if='vesselForm.vesselName.$invalid && vesselForm.vesselName.$dirty'>
+                <input required name="name" ng-model="vessel.name">
+                <div ng-messages ng-if='vesselForm.name.$invalid && vesselForm.name.$dirty'>
                     <div ng-message>This field is required</div>
                 </div>
             </md-input-container>
             <md-input-container>
-                <label>Width <small>(in meters)</small></label>
-                <input required name="vesselWidth" ng-model="vessel.width">
-                <div ng-messages ng-if='vesselForm.vesselWidth.$invalid && vesselForm.vesselWidth.$dirty'>
+                <label>Width
+                    <small>(in meters)</small>
+                </label>
+                <input required name="width" ng-model="vessel.width">
+                <div ng-messages ng-if='vesselForm.width.$invalid && vesselForm.width.$dirty'>
                     <div ng-message>This field is required</div>
                 </div>
             </md-input-container>
             <md-input-container>
-                <label>Length <small>(in meters)</small></label>
-                <input required name="vesselLength" ng-model="vessel.length">
-                <div ng-messages ng-if='vesselForm.vesselLength.$invalid && vesselForm.vesselLength.$dirty'>
+                <label>Length
+                    <small>(in meters)</small>
+                </label>
+                <input required name="len" ng-model="vessel.len">
+                <div ng-messages ng-if='vesselForm.len.$invalid && vesselForm.len.$dirty'>
                     <div ng-message>This field is required</div>
                 </div>
             </md-input-container>
             <md-input-container>
-                <label>Draft <small>(in meters)</small></label>
-                <input required name="vesselDraft" ng-model="vessel.draft">
-                <div ng-messages ng-if='vesselForm.vesselDraft.$invalid && vesselForm.vesselDraft.$dirty'>
+                <label>Draft
+                    <small>(in meters)</small>
+                </label>
+                <input required name="draft" ng-model="vessel.draft">
+                <div ng-messages ng-if='vesselForm.draft.$invalid && vesselForm.draft.$dirty'>
                     <div ng-message>This field is required</div>
                 </div>
             </md-input-container>
@@ -43,15 +49,15 @@
             <md-content layout="row">
                 <md-input-container>
                     <label>Latitude</label>
-                    <input required name="vesselLatitude" ng-model="vessel.last_known_position[0]">
-                    <div ng-messages ng-if='vesselForm.vesselLatitude.$invalid && vesselForm.vesselLatitude.$dirty'>
+                    <input required name="last_known_position" ng-model="vessel.last_known_position[1]">
+                    <div ng-messages ng-if='vesselForm.last_known_position.$invalid && vesselForm.last_known_position.$dirty'>
                         <div ng-message>This field is required</div>
                     </div>
                 </md-input-container>
                 <md-input-container>
                     <label>Longitude</label>
-                    <input required name="vesselLongitude" ng-model="vessel.last_known_position[1]">
-                    <div ng-messages ng-if='vesselForm.vesselLongitude.$invalid && vesselForm.vesselLongitude.$dirty'>
+                    <input required name="last_known_position" ng-model="vessel.last_known_position[0]">
+                    <div ng-messages ng-if='vesselForm.last_known_position.$invalid && vesselForm.last_known_position.$dirty'>
                         <div ng-message>This field is required</div>
                     </div>
                 </md-input-container>
@@ -59,13 +65,13 @@
         </form>
     </md-dialog-content>
     <div class="md-actions" layout="row">
-        <md-button ng-if='vessel.id !== undefined' ng-click='deleteVessel($event)' class="md-warn">
+        <md-button ng-if='vessel._id !== undefined' ng-click='deleteVessel($event)' class="md-warn">
             Delete
         </md-button>
         <span flex></span>
         <md-button ng-click="addVessel()" class="md-primary md-raised" aria-label="Submit vessel form">
-            <span ng-if='vessel.id === undefined && !sending'>Add</span>
-            <span ng-if='vessel.id !== undefined && !sending'>Update</span>
+            <span ng-if='vessel._id === undefined && !sending'>Add</span>
+            <span ng-if='vessel._id !== undefined && !sending'>Update</span>
             <md-icon ng-if='sending' class="fa fa-circle-o-notch fa-spin fa-2x" aria-label="Loading"></md-icon>
         </md-button>
     </div>
