@@ -9,10 +9,11 @@
         </md-content>
         <md-list>
             <md-subheader class="md-no-sticky">{{vessels.length}} Vessels</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="vessel in vessels track by vessel.id">
+            <h3 class="text-center" ng-if='vessels.length === 0'>You have no Vessels. Add a new one by clicking the button above</h3>
+            <md-list-item class="md-2-line" ng-repeat="vessel in vessels track by vessel._id">
                 <div class="md-list-item-text">
-                    <h3>#{{vessel.id}} {{vessel.name}}</h3>
-                    <p>Last known position: ({{vessel.last_known_position[0]}}, {{vessel.last_known_position[1]}})</p>
+                    <h3>#{{vessel._id}} {{vessel.name}}</h3>
+                    <p>Last known position: ({{vessel.last_known_position[1]}}, {{vessel.last_known_position[0]}})</p>
                 </div>
 
                 <md-button class="md-accent md-fab md-mini md-raised" ng-click='editVessel($event, vessel)'>
