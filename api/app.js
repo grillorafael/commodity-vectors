@@ -93,9 +93,7 @@ app.post('/api/vessels', function(req, res) {
         });
     } else {
         vessel.save(function(err) {
-            console.log(err);
             if (!err) {
-                console.log('saved', vessel);
                 res.json(vessel);
             } else {
                 res.status(400).json({
@@ -108,7 +106,5 @@ app.post('/api/vessels', function(req, res) {
 
 
 var server = app.listen(3000, function() {
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('Example app listening at http://localhost:3000');
 });
