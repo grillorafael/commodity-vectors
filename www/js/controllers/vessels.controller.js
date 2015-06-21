@@ -1,8 +1,11 @@
 (function() {
     angular.module('commodity-vectors.controllers').controller('VesselsCtrl', VesselsCtrl);
 
-    function VesselsCtrl($scope, $mdDialog, Vessel) {
-        $scope.vessels = Vessel.query(function(vessels) {});
+    function VesselsCtrl($scope, $mdDialog, $timeout, Vessel) {
+        $scope.isLoading = true;
+        $scope.vessels = Vessel.query(function(vessels) {
+            $scope.isLoading = false;
+        });
 
         $scope.mapOptions = {
             panControl: false,

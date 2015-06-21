@@ -1,7 +1,7 @@
 (function() {
     angular.module('commodity-vectors.controllers').controller('VesselFormCtrl', VesselFormCtrl);
 
-    function VesselFormCtrl($scope, $mdDialog, $rootScope, vessel, Vessel, displayVesselForm) {
+    function VesselFormCtrl($scope, $mdDialog, $timeout, vessel, Vessel, displayVesselForm) {
         if (!vessel) {
             vessel = {
                 last_known_position: []
@@ -12,6 +12,26 @@
         $scope.vessel = vessel;
 
         $scope.sending = false;
+
+        $scope.onPastePosition = function() {
+            $timeout(function() {
+                var content = $scope.vessel.last_known_position[1];
+                if(content && content.split(',').length == 2) {
+                    content = content.split(',');
+                    var latitude = content[0];
+                    var longitude = content[1];
+                    try {
+                        $scope.vessel.last_known_position = [
+                            longitude,
+                            latitude
+                        ];
+                    }
+                    catch(e) {
+                        // Not numeric
+                    }
+                }
+            });
+        };
 
         $scope.openEdit = function(e) {
             displayVesselForm(e, $scope.vessel);

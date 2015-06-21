@@ -49,7 +49,7 @@
             <md-content layout="row">
                 <md-input-container>
                     <label>Latitude</label>
-                    <input required name="last_known_position" ng-model="vessel.last_known_position[1]">
+                    <input required name="last_known_position" ng-model="vessel.last_known_position[1]" ng-paste="onPastePosition()">
                     <div ng-messages ng-if='vesselForm.last_known_position.$invalid && vesselForm.last_known_position.$dirty'>
                         <div ng-message>This field is required</div>
                     </div>
