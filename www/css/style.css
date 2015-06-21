@@ -27,3 +27,7 @@
 .view-display dd {
     margin-left: 10px;
 }
+
+.vessels-list .angular-google-map-container {
+    height: 200px;
+}
