@@ -23,10 +23,19 @@ describe('vessels home page', function() {
             });
     }
 
-    it('should list vessels', function() {
+    it('should list vessels by cards', function() {
         mockList();
         browser.get('/');
-        expect(element(by.css('#vessel-5585da5c423b597f072c98ee')).isPresent()).toBeTruthy();
+        expect(element(by.css('md-card#vessel-5585da5c423b597f072c98ee')).isPresent()).toBeTruthy();
+    });
+
+    it('should switch view mode', function() {
+        mockList();
+        browser.get('/');
+
+        element(by.css('md-select')).click();
+        element(by.css('md-option:last-child')).click();
+        expect(element(by.css('md-list-item#vessel-5585da5c423b597f072c98ee')).isPresent()).toBeTruthy();
     });
 
     describe('empty vessels', function() {
@@ -49,7 +58,7 @@ describe('vessels home page', function() {
         mockList();
         browser.get('/');
 
-        element(by.css('#vessel-5585da5c423b597f072c98ee .fa.fa-lg.fa-eye')).click();
+        element(by.css('md-card#vessel-5585da5c423b597f072c98ee .md-actions button:last-child')).click();
         expect(element(by.css('md-dialog')).isPresent()).toBeTruthy();
         expect(element(by.css('md-dialog > md-toolbar > div > h2')).getText())
             .toContain("VX82");
