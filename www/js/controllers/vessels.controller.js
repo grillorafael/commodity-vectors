@@ -2,10 +2,21 @@
     angular.module('commodity-vectors.controllers').controller('VesselsCtrl', VesselsCtrl);
 
     function VesselsCtrl($scope, $mdDialog, $timeout, Vessel) {
-        $scope.isLoading = true;
-        $scope.vessels = Vessel.query(function(vessels) {
-            $scope.isLoading = false;
-        });
+        $scope.viewModes = [
+            {
+                value: "/views/fragments/_vessels.card.html",
+                label: "View as Cards"
+            },
+            {
+                value: "/views/fragments/_vessels.list.html",
+                label: "View as List"
+            }
+        ];
+
+        $scope.status = {
+            isLoading: true,
+            viewMode: $scope.viewModes[0].value
+        };
 
         $scope.mapOptions = {
             panControl: false,
@@ -14,6 +25,10 @@
             streetViewControl: false
         };
         $scope.initialZoom = 14;
+
+        $scope.vessels = Vessel.query(function(vessels) {
+            $scope.status.isLoading = false;
+        });
 
         function updateVesselsList(newVessel) {
             var found = false;
@@ -67,13 +82,6 @@
                     updateVesselsList(vessel);
                 }
             });
-        };
-
-        $scope.getPosition = function(vessel) {
-            return {
-                latitude: vessel.last_known_position[1],
-                longitude: vessel.last_known_position[0]
-            };
         };
 
         $scope.addVessel = displayVesselForm;
