@@ -1,11 +1,11 @@
 <md-content layout="row" class="vessels-list">
     <span flex hide-sm></span>
     <md-content flex="80" flex-sm="100" layout="column">
-        <md-content ng-if='isLoading' layout="column" layout-align="center center">
+        <md-content ng-if='status.isLoading' layout="column" layout-align="center center">
             <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
             <p>Loading your Vessels..</p>
         </md-content>
-        <md-content ng-if='!isLoading'>
+        <md-content ng-if='!status.isLoading'>
             <md-content ng-if='vessels.length > 0' layout="row">
                 <md-button class="md-raised md-primary" ng-click='addVessel($event)'>
                     <md-icon class="fa fa-plus fa-2x"></md-icon>
