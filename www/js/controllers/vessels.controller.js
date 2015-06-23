@@ -2,20 +2,18 @@
     angular.module('commodity-vectors.controllers').controller('VesselsCtrl', VesselsCtrl);
 
     function VesselsCtrl($scope, $mdDialog, $timeout, Vessel) {
-        $scope.viewModes = [
-            {
-                value: "/views/fragments/_vessels.card.html",
-                label: "View as Cards"
-            },
-            {
-                value: "/views/fragments/_vessels.list.html",
-                label: "View as List"
-            }
-        ];
+        $scope.viewModes = [{
+            value: "/views/fragments/_vessels.card.html",
+            label: "View as Cards"
+        }, {
+            value: "/views/fragments/_vessels.list.html",
+            label: "View as List"
+        }];
 
+        var initialViewMode = localStorage.getItem('vessels_view_mode') || $scope.viewModes[0].value;
         $scope.status = {
             isLoading: true,
-            viewMode: $scope.viewModes[0].value
+            viewMode: initialViewMode
         };
 
         $scope.mapOptions = {
@@ -35,16 +33,15 @@
             $scope.vessels.forEach(function(vessel, idx) {
                 if (vessel._id === newVessel._id) {
                     found = true;
-                    if(newVessel.deleted) {
+                    if (newVessel.deleted) {
                         $scope.vessels.splice(idx, 1);
-                    }
-                    else {
+                    } else {
                         $scope.vessels[idx] = newVessel;
                     }
                 }
             });
 
-            if(!found) {
+            if (!found) {
                 $scope.vessels.push(newVessel);
             }
         }
@@ -61,7 +58,7 @@
                 templateUrl: '/views/vessels.form.html',
                 targetEvent: ev,
             }).then(function(vessel) {
-                if(vessel) {
+                if (vessel) {
                     updateVesselsList(vessel);
                 }
             });
@@ -78,10 +75,14 @@
                 templateUrl: '/views/vessels.view.html',
                 targetEvent: ev,
             }).then(function(vessel) {
-                if(vessel) {
+                if (vessel) {
                     updateVesselsList(vessel);
                 }
             });
+        };
+
+        $scope.onChangeViewMode = function() {
+            localStorage.setItem('vessels_view_mode', $scope.status.viewMode);
         };
 
         $scope.addVessel = displayVesselForm;

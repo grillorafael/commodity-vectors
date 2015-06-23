@@ -12,6 +12,9 @@
         $scope.vessel = vessel;
 
         $scope.sending = false;
+        $scope.deleteChain = {
+            first: true
+        };
 
         $scope.onPastePosition = function() {
             $timeout(function() {
@@ -38,27 +41,35 @@
         };
 
         $scope.addVessel = function() {
-            $scope.sending = true;
-            $scope.vessel.$save(function(v, response) {
-                $mdDialog.hide(v);
-                $scope.sending = false;
-            }, function(response) {
-                $scope.sending = false;
-                if (response.data.errors) {
-                    Object.keys(response.data.errors).forEach(function(field) {
-                        $scope.vesselForm[field].$setDirty();
-                        $scope.vesselForm[field].$setValidity('required', false);
-                    });
-                }
-            });
+            if($scope.vesselForm.$valid) {
+                $scope.sending = true;
+                $scope.vessel.$save(function(v, response) {
+                    $mdDialog.hide(v);
+                    $scope.sending = false;
+                }, function(response) {
+                    $scope.sending = false;
+                    if (response.data.errors) {
+                        Object.keys(response.data.errors).forEach(function(field) {
+                            $scope.vesselForm[field].$setDirty();
+                            $scope.vesselForm[field].$setValidity('required', false);
+                        });
+                    }
+                });
+            }
         };
 
         $scope.deleteVessel = function(ev) {
-            $scope.vessel.deleted = new Date();
-            Vessel.remove({
-                id: $scope.vessel._id
-            });
-            $mdDialog.hide($scope.vessel);
+            if($scope.deleteChain.first) {
+                delete $scope.deleteChain.first;
+                $scope.deleteChain.confirm = true;
+            }
+            else {
+                $scope.vessel.deleted = new Date();
+                Vessel.remove({
+                    id: $scope.vessel._id
+                });
+                $mdDialog.hide($scope.vessel);
+            }
         };
 
         $scope.closeDialog = function() {

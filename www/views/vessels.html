@@ -1,22 +1,22 @@
 <md-content layout="row" class="vessels-list">
     <span flex hide-sm></span>
     <md-content flex="80" flex-sm="100" layout="column">
-        <md-content ng-if='status.isLoading' layout="column" layout-align="center center">
+        <md-content layout="column" layout-align="center center" ng-if='status.isLoading'>
             <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
             <p>Loading your Vessels..</p>
         </md-content>
         <md-content ng-if='!status.isLoading'>
-            <md-content ng-if='vessels.length > 0' layout="row">
+            <md-content layout="row" ng-if='vessels.length > 0'>
                 <md-button class="md-raised md-primary" ng-click='addVessel($event)'>
                     <md-icon class="fa fa-plus fa-2x"></md-icon>
                     Add Vessel
                 </md-button>
                 <span flex></span>
-                <md-select placeholder="Visualization Mode" ng-model="status.viewMode">
-                    <md-option ng-repeat='viewMode in viewModes' value="{{viewMode.value}}">{{viewMode.label}}</md-option>
+                <md-select placeholder="Visualization Mode" ng-model="status.viewMode" ng-change='onChangeViewMode()'>
+                    <md-option value="{{viewMode.value}}" ng-repeat='viewMode in viewModes'>{{viewMode.label}}</md-option>
                 </md-select>
             </md-content>
-            <md-content ng-if='vessels.length === 0' class="text-center">
+            <md-content class="text-center" ng-if='vessels.length === 0'>
                 <h3 class="text-center">
                     You have no Vessels <i class="fa fa-frown-o"></i>
                     <br> Click the button below to add a new one

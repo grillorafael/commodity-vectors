@@ -4,6 +4,7 @@
     angular.module('commodity-vectors', [
             'ui.router',
             'ngMaterial',
+            'ngMessages',
             'uiGmapgoogle-maps',
             'commodity-vectors.controllers',
             'commodity-vectors.services'
