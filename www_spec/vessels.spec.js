@@ -1,36 +1,22 @@
+var VesselsMock = require('./fixtures/vessels');
+
 describe('vessels home page', function() {
     function fail() {
         expect(false).toEqual(true);
     }
 
-    function mockList() {
-        browser.addMockModule('httpBackendMock',
-            function() {
-                angular.module('httpBackendMock', ['commodity-vectors', 'ngMockE2E'])
-                    .run(function($httpBackend) {
-                        $httpBackend.whenGET('http://localhost:3000/api/vessels').respond([{
-                            "_id": "5585da5c423b597f072c98ee",
-                            "last_known_position": [-43.212265, -22.892467],
-                            "name": "VX82",
-                            "width": 30,
-                            "len": 120,
-                            "draft": 80,
-                            "__v": 0
-                        }]);
-
-                        $httpBackend.whenGET(/views/).passThrough();
-                    });
-            });
-    }
+    afterEach(function() {
+        browser.executeScript('window.localStorage.clear();');
+    });
 
     it('should list vessels by cards', function() {
-        mockList();
+        VesselsMock.mockList();
         browser.get('/');
         expect(element(by.css('md-card#vessel-5585da5c423b597f072c98ee')).isPresent()).toBeTruthy();
     });
 
     it('should switch view mode', function() {
-        mockList();
+        VesselsMock.mockList();
         browser.get('/');
 
         element(by.css('md-select')).click();
@@ -40,22 +26,14 @@ describe('vessels home page', function() {
 
     describe('empty vessels', function() {
         it('should show add button', function() {
-            browser.addMockModule('httpBackendMock',
-                function() {
-                    angular.module('httpBackendMock', ['commodity-vectors', 'ngMockE2E'])
-                        .run(function($httpBackend) {
-                            $httpBackend.whenGET('http://localhost:3000/api/vessels').respond([]);
-                            $httpBackend.whenGET(/views/).passThrough();
-                        });
-                });
-
+            VesselsMock.mockEmpty();
             browser.get('/');
             expect(element(by.css('.fa.fa-2x.fa-plus')).isPresent()).toBeTruthy();
         });
     });
 
     it('should view vessel', function() {
-        mockList();
+        VesselsMock.mockList();
         browser.get('/');
 
         element(by.css('md-card#vessel-5585da5c423b597f072c98ee .md-actions button:last-child')).click();
@@ -63,6 +41,8 @@ describe('vessels home page', function() {
         expect(element(by.css('md-dialog > md-toolbar > div > h2')).getText())
             .toContain("VX82");
     });
+
+    it('should save last view mode', fail);
 
     describe('vessel edit', function() {
         it('should update main list', fail);

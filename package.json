@@ -1,27 +1,27 @@
 {
-  "name": "commodity-vectors",
-  "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "./node_modules/karma/bin/karma start"
-  },
-  "author": "Rafael Grillo Abreu <grillorafael@gmail.com> (http://rgrillo.com)",
-  "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.7.3",
-    "cheerio": "^0.19.0",
-    "gulp": "^3.8.11",
-    "gulp-autoprefixer": "^2.3.1",
-    "gulp-clean": "^0.3.1",
-    "gulp-cssmin": "^0.1.7",
-    "gulp-imagemin": "^2.3.0",
-    "gulp-minify-html": "^1.0.3",
-    "gulp-serve": "^1.0.0",
-    "gulp-uglify": "^1.2.0",
-    "httpbackend": "^1.2.1",
-    "imagemin-pngquant": "^4.1.0",
-    "mkdirp": "^0.5.1",
-    "run-sequence": "^1.1.1"
-  }
+    "name": "commodity-vectors",
+    "version": "1.0.0",
+    "description": "",
+    "main": "gulpfile.js",
+    "scripts": {
+        "test": "protractor conf.js"
+    },
+    "author": "Rafael Grillo Abreu <grillorafael@gmail.com> (http://rgrillo.com)",
+    "license": "ISC",
+    "devDependencies": {
+        "browser-sync": "^2.7.3",
+        "cheerio": "^0.19.0",
+        "gulp": "^3.8.11",
+        "gulp-autoprefixer": "^2.3.1",
+        "gulp-clean": "^0.3.1",
+        "gulp-cssmin": "^0.1.7",
+        "gulp-imagemin": "^2.3.0",
+        "gulp-minify-html": "^1.0.3",
+        "gulp-serve": "^1.0.0",
+        "gulp-uglify": "^1.2.0",
+        "httpbackend": "^1.2.1",
+        "imagemin-pngquant": "^4.1.0",
+        "mkdirp": "^0.5.1",
+        "run-sequence": "^1.1.1"
+    }
 }
