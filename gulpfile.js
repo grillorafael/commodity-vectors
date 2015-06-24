@@ -141,7 +141,7 @@ gulp.task('build-scripts', function() {
 
         gulp.src(script).pipe(uglify({mangle: false})).pipe(gulp.dest(fileFolder.join('/')));
 
-        $('body').append('<script src="' + scriptPathToSrc[script] + '?v=' + version + '"></script>');
+        $('body').append('<script async src="' + scriptPathToSrc[script] + '?v=' + version + '"></script>');
     });
 
     fs.writeFileSync(destFolder + "/" + buildIndex, $.html(), 'utf8');
