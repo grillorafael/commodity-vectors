@@ -26,12 +26,6 @@
                     url: "/vessels",
                     templateUrl: "/views/vessels.html",
                     controller: 'VesselsCtrl'
-                })
-                .state('vessels_alt', {
-                    url: "/vessels/alt",
-                    templateUrl: "/views/vessels.alt.html",
-                    controller: 'VesselsCtrl'
                 });
-
         });
 })();

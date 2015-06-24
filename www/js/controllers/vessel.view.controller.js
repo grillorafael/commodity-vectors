@@ -3,7 +3,6 @@
 
     function VesselViewCtrl($scope, $mdDialog, vessel, displayVesselForm) {
         $scope.vessel = vessel;
-
         $scope.map = {
             center: {
                 latitude: vessel.last_known_position[1],
@@ -17,7 +16,6 @@
                 latitude: vessel.last_known_position[1],
                 longitude: vessel.last_known_position[0]
             };
-
         };
 
         $scope.openEdit = function(e) {
