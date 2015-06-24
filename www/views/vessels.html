@@ -1,6 +1,6 @@
 <md-content layout="row" class="vessels-list">
-    <span flex hide-sm></span>
-    <md-content flex="80" flex-sm="100" layout="column">
+    <span flex hide-sm hide-md></span>
+    <md-content flex="80" flex-sm="100" flex-md="100" layout="column">
         <md-content layout="column" layout-align="center center" ng-if='status.isLoading'>
             <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
             <p>Loading your Vessels..</p>
@@ -28,5 +28,5 @@
             <div ng-include src="status.viewMode"></div>
         </md-content>
     </md-content>
-    <span flex hide-sm></span>
+    <span flex hide-sm hide-md></span>
 </md-content>
