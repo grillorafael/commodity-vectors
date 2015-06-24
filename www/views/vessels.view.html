@@ -25,7 +25,7 @@
             <dd>({{vessel.last_known_position[1]}}, {{vessel.last_known_position[0]}})</dd>
         </dl>
         <ui-gmap-google-map center='map.center' zoom='map.zoom' hide-sm>
-            <ui-gmap-marker idKey='vessel._id' coords='vessel.last_known_position'></ui-gmap-marker>
+            <ui-gmap-markers models='[vessel]' idKey='"_id"' coords="'last_known_position'">
         </ui-gmap-google-map>
     </md-dialog-content>
     <div class="md-actions" layout="row">
